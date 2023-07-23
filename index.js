@@ -48,15 +48,29 @@ server.post('/addProduct', (req, res) => {
 })
 //add raw-post
 server.post('/addRaw', (req, res) => {
-    logic.addProduct(req.body.rid, req.body.rname, req.body.rqty, req.body.rfrom, req.body.rdate, req.body.usage).then(result => {
+    logic.addRaw(req.body.rid, req.body.rname, req.body.rqty, req.body.rfrom, req.body.rdate, req.body.usage).then(result => {
         //convert into json and send
         res.status(result.statusCode).json(result)
     })
 })
 //employee details array in emp component
-// server.get('/employee/:eid',(req,res)=>{
-// logic.employee(req.params.eid).then(result=>
-//     {
-//         res.status(result.statusCode).json(result)
-//     })
-// })
+server.get('/employee/',(req,res)=>{
+logic.getEmployee().then(result=>
+    {
+        res.status(result.statusCode).json(result)
+    })
+})
+//product details array in pro component
+server.get('/product/',(req,res)=>{
+    logic.getProduct().then(result=>
+        {
+            res.status(result.statusCode).json(result)
+        })
+    })
+//raw details array in raw component
+server.get('/rawmaterial/',(req,res)=>{
+    logic.getRaw().then(result=>
+        {
+            res.status(result.statusCode).json(result)
+        })
+    })

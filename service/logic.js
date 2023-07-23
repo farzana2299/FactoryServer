@@ -2,7 +2,7 @@
 const db = require('./db')
 
 login = (uname, psw) => {
-    return db.User.findOne({ uname, psw }).then(user => {
+    return db.User.findOne({ uname,psw }).then(user => {
         if (user) {
          return{
             message: 'login success',
@@ -14,7 +14,7 @@ login = (uname, psw) => {
         }
         else {
             return {
-                message: 'Incorrect username or password',
+                message: 'This user didnot exist',
                 status: false,
                 statusCode: 404
 
@@ -26,8 +26,8 @@ login = (uname, psw) => {
 //app emp
 
 addEmployee = (eid,ename,eposition,edept,ephone,esal,ejoining,estaff,eleave) => {
-    return db.User.findOne({ eid:eid }).then(user => {
-        if (user) {
+    return db.Emp.findOne({ eid:eid }).then(emp => {
+        if (emp) {
             return {
                 message: 'This employee already present',
                 status: false,
@@ -35,7 +35,7 @@ addEmployee = (eid,ename,eposition,edept,ephone,esal,ejoining,estaff,eleave) => 
             }
         }
         else {
-            newuser = new db.User({
+            newemp = new db.Emp({
                 eid:eid,
                 ename:ename,
                 eposition:eposition,
@@ -48,7 +48,7 @@ addEmployee = (eid,ename,eposition,edept,ephone,esal,ejoining,estaff,eleave) => 
 
             })
             //to reflect the changes done by server in database
-            newuser.save()
+            newemp.save()
             return {
                 message: 'Employee Registration done successfully',
                 status: true,
@@ -64,8 +64,8 @@ addEmployee = (eid,ename,eposition,edept,ephone,esal,ejoining,estaff,eleave) => 
 //app product
 
 addProduct = (pid,pname,quantity,pdate,pexport,pplace) => {
-    return db.User.findOne({ pid:pid }).then(user => {
-        if (user) {
+    return db.Prod.findOne({ pid:pid }).then(pro => {
+        if (pro) {
             return {
                 message: 'This product already present',
                 status: false,
@@ -73,7 +73,7 @@ addProduct = (pid,pname,quantity,pdate,pexport,pplace) => {
             }
         }
         else {
-            newpro = new db.User({
+            newpro = new db.Prod({
                 pid:pid,
                 pname:pname,
                 quantity:quantity,
@@ -95,19 +95,18 @@ addProduct = (pid,pname,quantity,pdate,pexport,pplace) => {
         }
     })
 }
-//app raw
-
+//add raw
 addRaw = (rid,rname,rqty,rfrom,rdate,usage) => {
-    return db.User.findOne({ pid:pid }).then(user => {
-        if (user) {
+    return db.Raw.findOne({ rid:rid }).then(raw => {
+        if (raw) {
             return {
-                message: 'This raw-material already present',
+                message: 'This material already present',
                 status: false,
                 statusCode: 404
             }
         }
         else {
-            newraw = new db.User({
+            newraw = new db.Raw({
                 rid:rid,
                 rname:rname,
                 rqty:rqty,
@@ -119,7 +118,7 @@ addRaw = (rid,rname,rqty,rfrom,rdate,usage) => {
             //to reflect the changes done by server in database
             newraw.save()
             return {
-                message: 'New raw-material added successfully',
+                message: 'New material added successfully',
                 status: true,
                 statusCode: 200
 
@@ -129,27 +128,67 @@ addRaw = (rid,rname,rqty,rfrom,rdate,usage) => {
         }
     })
 }
-//get employee details
-// employee=>{
-//     return db.User.findOne().then(user=>{
-//         if(user)
-//         {
-//             return{
-//                 message:"success",
-//                 status: true,
-//                 statusCode: 200
-//             }
-//         }
-//         else{
-//             return{
-//                 message: 'please check again',
-//                 status: false,
-//                 statusCode: 404
-//             }
-//         }
-//     })
-// }
 
+//get employee details
+getEmployee=()=>{
+    return db.Emp.find().then(emp=>{
+        if(emp)
+        {
+            return{
+                message:emp,
+                status: true,
+                statusCode: 200
+            }
+        }
+        else{
+            return{
+                message: 'please check again',
+                status: false,
+                statusCode: 404
+            }
+        }
+    })
+}
+//get product details
+getProduct=()=>{
+    return db.Prod.find().then(pro=>{
+        if(pro)
+        {
+            return{
+                message:pro,
+                status: true,
+                statusCode: 200
+            }
+        }
+        else{
+            return{
+                message: 'please check again',
+                status: false,
+                statusCode: 404
+            }
+        }
+    })
+}
+//get raw details
+getRaw=()=>{
+    return db.Raw.find().then(raw=>{
+        if(raw)
+        {
+            return{
+                message:raw,
+                status: true,
+                statusCode: 200
+            }
+        }
+        else{
+            return{
+                message: 'please check again',
+                status: false,
+                statusCode: 404
+            }
+        }
+    })
+}
 module.exports = {
-    login,addEmployee,addProduct,addRaw
+    login,addEmployee,addProduct,addRaw,getEmployee,getProduct,getRaw
 }
