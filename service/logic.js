@@ -189,6 +189,66 @@ getRaw=()=>{
         }
     })
 }
+deleteEmployee=(eid)=>{
+    return db.Emp.deleteOne({eid}).then(result=>{
+        if(result)
+        {
+            return{
+                message:'Deleted Successfully',
+                status: true,
+                statusCode: 200
+            }
+        }
+        else
+        {
+            return{
+                message: 'Please Check again',
+                status: false,
+                statusCode: 404
+            }
+        }
+    })
+}
+deleteProduct=(pid)=>{
+    return db.Prod.findByIdAndDelete({pid}).then(result=>{
+        if(result)
+        {
+            return{
+                message:'Deleted Successfully',
+                status: true,
+                statusCode: 200
+            }
+        }
+        else
+        {
+            return{
+                message: 'Please Check again',
+                status: false,
+                statusCode: 404
+            }
+        }
+    })
+}
+deleteRaw=(rid)=>{
+    return db.Raw.deleteOne({rid}).then(result=>{
+        if(result)
+        {
+            return{
+                message:'Deleted Successfully',
+                status: true,
+                statusCode: 200
+            }
+        }
+        else
+        {
+            return{
+                message: 'Please Check again',
+                status: false,
+                statusCode: 404
+            }
+        }
+    })
+}
 module.exports = {
-    login,addEmployee,addProduct,addRaw,getEmployee,getProduct,getRaw
+    login,addEmployee,addProduct,addRaw,getEmployee,getProduct,getRaw,deleteEmployee,deleteProduct,deleteRaw
 }

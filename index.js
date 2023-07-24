@@ -74,3 +74,21 @@ server.get('/rawmaterial/',(req,res)=>{
             res.status(result.statusCode).json(result)
         })
     })
+//delete emp
+server.delete('/employee/:eid',(req,res)=>{
+    logic.deleteEmployee(req.params.eid).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+//delete pro
+server.delete('/product/:pid',(req,res)=>{
+    logic.deleteProduct(req.params.pid).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+//delete raw
+server.delete('/rawmaterial/:eird',(req,res)=>{
+    logic.deleteRaw(req.params.rid).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
