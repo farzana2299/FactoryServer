@@ -190,7 +190,7 @@ getRaw=()=>{
     })
 }
 deleteEmployee=(eid)=>{
-    return db.Emp.deleteOne({eid}).then(result=>{
+    return db.Emp.deleteOne({eid:eid}).then(result=>{
         if(result)
         {
             return{
@@ -210,7 +210,7 @@ deleteEmployee=(eid)=>{
     })
 }
 deleteProduct=(pid)=>{
-    return db.Prod.findByIdAndDelete({pid}).then(result=>{
+    return db.Prod.deleteOne({pid:pid}).then(result=>{
         if(result)
         {
             return{
@@ -230,7 +230,7 @@ deleteProduct=(pid)=>{
     })
 }
 deleteRaw=(rid)=>{
-    return db.Raw.deleteOne({rid}).then(result=>{
+    return db.Raw.deleteOne({rid:rid}).then(result=>{
         if(result)
         {
             return{

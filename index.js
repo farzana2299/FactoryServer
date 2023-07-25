@@ -75,19 +75,19 @@ server.get('/rawmaterial/',(req,res)=>{
         })
     })
 //delete emp
-server.delete('/employee/:eid',(req,res)=>{
+server.delete('/deleteEmployee/:eid',(req,res)=>{
     logic.deleteEmployee(req.params.eid).then(result=>{
         res.status(result.statusCode).json(result)
     })
 })
 //delete pro
-server.delete('/product/:pid',(req,res)=>{
+server.delete('/deleteProduct/:pid',(req,res)=>{
     logic.deleteProduct(req.params.pid).then(result=>{
         res.status(result.statusCode).json(result)
     })
 })
 //delete raw
-server.delete('/rawmaterial/:eird',(req,res)=>{
+server.delete('/deleteRaw/:rid',(req,res)=>{
     logic.deleteRaw(req.params.rid).then(result=>{
         res.status(result.statusCode).json(result)
     })
