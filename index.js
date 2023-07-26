@@ -34,7 +34,8 @@ server.post('/login', (req, res) => {
 
 //add employee-post
 server.post('/addEmployee', (req, res) => {
-    logic.addEmployee(req.body.eid, req.body.ename, req.body.eposition, req.body.edept, req.body.ephone, req.body.esal, req.body.ejoining, req.body.estaff, req.body.eleave).then(result => {
+    logic.addEmployee(req.body.eid, req.body.ename, req.body.eposition, req.body.edept, req.body.ephone,req.body.email,
+        req.body.ephoto, req.body.esal, req.body.ejoining, req.body.estaff, req.body.eleave).then(result => {
         //convert into json and send
         res.status(result.statusCode).json(result)
     })
@@ -60,9 +61,23 @@ logic.getEmployee().then(result=>
         res.status(result.statusCode).json(result)
     })
 })
+//single employee detail
+server.get('/viewemp/:eid/',(req,res)=>{
+    logic.getEmp(req.params.eid).then(result=>
+        {
+            res.status(result.statusCode).json(result)
+        })
+    })
 //product details array in pro component
 server.get('/product/',(req,res)=>{
     logic.getProduct().then(result=>
+        {
+            res.status(result.statusCode).json(result)
+        })
+    })
+    //single product details
+server.get('/viewpro/:pid/',(req,res)=>{
+    logic.getPro(req.params.pid).then(result=>
         {
             res.status(result.statusCode).json(result)
         })
@@ -74,21 +89,46 @@ server.get('/rawmaterial/',(req,res)=>{
             res.status(result.statusCode).json(result)
         })
     })
+    //single raw details
+server.get('/viewraw/:rid/',(req,res)=>{
+    logic.getsRaw(req.params.rid).then(result=>
+        {
+            res.status(result.statusCode).json(result)
+        })
+    })
 //delete emp
-server.delete('/deleteEmployee/:eid',(req,res)=>{
-    logic.deleteEmployee(req.params.eid).then(result=>{
+server.delete('/viewemp/:eid',(req,res)=>{
+    logic.deleteemp(req.params.eid).then(result=>{
         res.status(result.statusCode).json(result)
     })
 })
 //delete pro
-server.delete('/deleteProduct/:pid',(req,res)=>{
-    logic.deleteProduct(req.params.pid).then(result=>{
+server.delete('/viewpro/:pid',(req,res)=>{
+    logic.deletepro(req.params.pid).then(result=>{
         res.status(result.statusCode).json(result)
     })
 })
 //delete raw
-server.delete('/deleteRaw/:rid',(req,res)=>{
-    logic.deleteRaw(req.params.rid).then(result=>{
+server.delete('/viewraw/:rid',(req,res)=>{
+    logic.deleteraw(req.params.rid).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+//edit emp
+server.post('/editEmployee/:eid',(req,res)=>{
+    logic.editEmp(req.params.eid,req.body).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+//edit pro
+server.post('/editProduct/:pid',(req,res)=>{
+    logic.editProduct(req.params.pid,req.body).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+//edit raw
+server.post('/editRaw/:rid',(req,res)=>{
+    logic.editRaw(req.params.rid,req.body).then(result=>{
         res.status(result.statusCode).json(result)
     })
 })

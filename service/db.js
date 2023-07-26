@@ -16,10 +16,12 @@ const Emp=mongoose.model('Emp',{
     eposition:String,
     edept:String,
     ephone:String,
+    email:String,
+    ephoto:String,
     esal:Number,
-    ejoining:Date,
+    ejoining:String,
     estaff:String,
-    eleaving:Date
+    eleaving:String
 })
 
 const Prod=mongoose.model('Prod',{
